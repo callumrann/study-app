@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://dukdpki28qai"]
+
+[ext_resource type="Script" uid="uid://b2vsyl2e2cmu3" path="res://scripts/timer_text.gd" id="1_o5qli"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_sgp6g"]
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundColour" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.90707284, 0.9070728, 0.9070728, 1)
+
+[node name="TimerText" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -87.5
+offset_right = 87.5
+offset_bottom = 69.0
+grow_horizontal = 2
+text = "test"
+label_settings = SubResource("LabelSettings_sgp6g")
+horizontal_alignment = 1
+script = ExtResource("1_o5qli")
+metadata/_edit_use_anchors_ = true
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="TimerText" method="_on_timer_timeout"]
