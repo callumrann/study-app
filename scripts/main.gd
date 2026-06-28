@@ -4,6 +4,8 @@ extends Control
 @onready var timer: Timer = $"Timer"
 @onready var timer_input: SpinBox = $"TimerInput"
 
+const save_path: String = "user://study_data.cfg"
+
 var time: int = 60
 var time_paused: bool = true
 
@@ -32,3 +34,8 @@ func _on_timer_input_value_changed(value: float) -> void:
 	time = value
 	_update_timer_text()
 	timer.start() # to reset second
+
+
+# think about making it button to enter, smth with apply() I think
+# also add save data
+# potentially move this script to a new timer scene

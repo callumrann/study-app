@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="study-app"
-run/main_scene="uid://dukdpki28qai"
+run/main_scene="uid://bsv33j3eb0hmy"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
