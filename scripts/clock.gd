@@ -16,6 +16,7 @@ var clock_paused: bool = true
 func _ready() -> void:
 	_load_study_time()
 	_update_timer_text()
+	saved_label.text = "Saved Time: " + _format_seconds_to_dhms(total_study_time)
 
 func _on_timer_timeout() -> void:
 	if time_left > 0:
@@ -58,13 +59,27 @@ func _load_study_time():
 		return
 	
 	total_study_time = config.get_value("Stats", "total_study_time_seconds")
-	saved_label.text = "Saved Time: " + str(total_study_time)
 	
 func _notification(what: int) -> void:
-	
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		_save_study_time()
 		get_tree().quit()
+
+func _format_seconds_to_dhms(seconds: int):
+	var days: int = seconds / 86400
+	var hours: int = (seconds % 86400) / 3600
+	var minutes: int = (seconds % 3600) / 60
+	seconds = seconds % 60
+	
+	 # need 02 formatting? consider what ui will look like
+	if days > 0:
+		return "%dd %02dh %02dm %02ds" % [days, hours, minutes, seconds]
+	elif hours > 0:
+		return "%02dh %02dm %02ds" % [hours, minutes, seconds]
+	elif minutes > 0:
+		return "%02dm %02ds" % [minutes, seconds]
+	else:
+		return "%02ds" % [seconds]
 
 # think about making it button to enter, smth with apply() ?
 # add debug mode?
