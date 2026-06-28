@@ -1,9 +1,10 @@
-extends Label
+extends Control
 
-@onready var timer: Timer = $"../Timer"
+@onready var timer_label: Label = $"TimerText"
+@onready var timer: Timer = $"Timer"
+@onready var timer_input: SpinBox = $"TimerInput"
 
 var time: int = 60
-
 var time_paused: bool = true
 
 func _ready() -> void:
@@ -18,7 +19,7 @@ func _on_timer_timeout() -> void:
 		timer.stop()
 
 func _update_timer_text() -> void:
-	self.text = str(time)
+	timer_label.text = str(time)
 
 func _on_button_button_up() -> void:
 	time_paused = !time_paused
@@ -26,3 +27,8 @@ func _on_button_button_up() -> void:
 		timer.stop()
 	else:
 		timer.start()
+
+func _on_timer_input_value_changed(value: float) -> void:
+	time = value
+	_update_timer_text()
+	timer.start() # to reset second

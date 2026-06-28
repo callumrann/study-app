@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dukdpki28qai"]
 
-[ext_resource type="Script" uid="uid://b2vsyl2e2cmu3" path="res://scripts/timer_text.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://b2vsyl2e2cmu3" path="res://scripts/main.gd" id="1_o5qli"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_sgp6g"]
 font_size = 50
@@ -13,6 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_o5qli")
 
 [node name="BackgroundColour" type="ColorRect" parent="."]
 layout_mode = 1
@@ -35,7 +36,6 @@ grow_horizontal = 2
 text = "test"
 label_settings = SubResource("LabelSettings_sgp6g")
 horizontal_alignment = 1
-script = ExtResource("1_o5qli")
 metadata/_edit_use_anchors_ = true
 
 [node name="Timer" type="Timer" parent="."]
@@ -55,5 +55,14 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "pause button"
 
-[connection signal="timeout" from="Timer" to="TimerText" method="_on_timer_timeout"]
-[connection signal="button_up" from="Button" to="TimerText" method="_on_button_button_up"]
+[node name="TimerInput" type="SpinBox" parent="."]
+layout_mode = 0
+offset_left = 361.0
+offset_top = 242.0
+offset_right = 447.5625
+offset_bottom = 273.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
+[connection signal="changed" from="TimerInput" to="." method="_on_timer_input_changed"]
+[connection signal="value_changed" from="TimerInput" to="." method="_on_timer_input_value_changed"]
