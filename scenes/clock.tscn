@@ -15,7 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vlc7k")
 
-[node name="TimerText" type="Label" parent="."]
+[node name="ClockLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -29,9 +29,9 @@ label_settings = SubResource("LabelSettings_sgp6g")
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Timer" type="Timer" parent="."]
+[node name="ClockTimer" type="Timer" parent="."]
 
-[node name="Button" type="Button" parent="."]
+[node name="PauseButton" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -46,14 +46,13 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "pause button"
 
-[node name="TimerInput" type="SpinBox" parent="."]
+[node name="ClockInput" type="SpinBox" parent="."]
 layout_mode = 0
 offset_left = 361.0
 offset_top = 242.0
 offset_right = 447.5625
 offset_bottom = 273.0
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
-[connection signal="changed" from="TimerInput" to="." method="_on_timer_input_changed"]
-[connection signal="value_changed" from="TimerInput" to="." method="_on_timer_input_value_changed"]
+[connection signal="timeout" from="ClockTimer" to="." method="_on_timer_timeout"]
+[connection signal="button_up" from="PauseButton" to="." method="_on_pause_button_up"]
+[connection signal="value_changed" from="ClockInput" to="." method="_on_timer_input_value_changed"]

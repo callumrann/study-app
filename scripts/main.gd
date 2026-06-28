@@ -1,41 +1,41 @@
 extends Control
 
-@onready var timer_label: Label = $"TimerText"
-@onready var timer: Timer = $"Timer"
-@onready var timer_input: SpinBox = $"TimerInput"
+@onready var label: Label = $"ClockLabel"
+@onready var timer: Timer = $"ClockTimer"
+@onready var input_box: SpinBox = $"ClockInput" # not used currently (dont through signals)
 
 const save_path: String = "user://study_data.cfg"
 
-var time: int = 60
-var time_paused: bool = true
+var time_left: int = 60
+var clock_paused: bool = true
 
 func _ready() -> void:
 	_update_timer_text()
 
 func _on_timer_timeout() -> void:
-	if time > 0:
-		time -= 1
+	if time_left > 0:
+		time_left -= 1
 		_update_timer_text()
 	else:
 		print("timer finished")
 		timer.stop()
 
-func _update_timer_text() -> void:
-	timer_label.text = str(time)
-
-func _on_button_button_up() -> void:
-	time_paused = !time_paused
-	if time_paused:
+func _on_pause_button_up() -> void:
+	clock_paused = !clock_paused
+	if clock_paused:
 		timer.stop()
 	else:
 		timer.start()
 
 func _on_timer_input_value_changed(value: float) -> void:
-	time = value
+	time_left = value
 	_update_timer_text()
 	timer.start() # to reset second
 
+func _update_timer_text() -> void:
+	label.text = str(time_left)
 
+func _save_data() -> void:
+	pass
 # think about making it button to enter, smth with apply() I think
 # also add save data
-# potentially move this script to a new timer scene
